@@ -111,21 +111,21 @@
 # main()
 
 #8 - Crie um algoritmo que receba 5 números e exiba o maior e o menor número informados
-def encontrar_maior_menor():
-    numeros = []
+# def encontrar_maior_menor():
+#     numeros = []
 
 
-    for i in range(5):
-        num = float(input(f"Digite o {i + 1}º número: "))
-        numeros.append(num)
+#     for i in range(5):
+#         num = float(input(f"Digite o {i + 1}º número: "))
+#         numeros.append(num)
 
 
-    maior = max(numeros)
-    menor = min(numeros)
+#     maior = max(numeros)
+#     menor = min(numeros)
 
 
-    print(f"O maior número informado é: {maior}")
-    print(f"O menor número informado é: {menor}")
+#     print(f"O maior número informado é: {maior}")
+#     print(f"O menor número informado é: {menor}")
 
 
-encontrar_maior_menor()
+# encontrar_maior_menor()
