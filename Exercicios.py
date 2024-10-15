@@ -67,16 +67,21 @@
 #     termos = fibonacci(n)
 #     print(f"Os primeiros {n} da sequência de Fibonacci são: {termos}")
 
+#############################################################################################################################################
 #6 - Escreva um algoritmo que receba uma lista de números e retorne a lista ordenada de forma crescente (Bubble sort).
-def ordena (numeros):
-    return sorted(numeros)
+def bubble_sort(lista):
+    n = len(lista)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if lista[j] > lista[j+1]:
+                lista[j], lista[j+1] = lista[j+1], lista[j]
+    return lista
+entrada = input("Digite os números separados por espaço: ")
+numeros = list(map(int, entrada.split()))
+lista_ordenada = bubble_sort(numeros)
+print("Lista ordenada:", lista_ordenada)
 
-numeros = []
-for x in range (5):
-    
-
-
-
+#############################################################################################################################################
 #7 - Faça um programa que converta uma temperatura de Celsius para Fahrenheit e vice-versa. O usuário deverá escolher a conversão desejada.
 
 #8 - Crie um algoritmo que receba 5 números e exiba o maior e o menor número informados
