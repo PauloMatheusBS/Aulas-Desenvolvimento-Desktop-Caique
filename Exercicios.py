@@ -69,19 +69,63 @@
 
 #############################################################################################################################################
 #6 - Escreva um algoritmo que receba uma lista de números e retorne a lista ordenada de forma crescente (Bubble sort).
-def bubble_sort(lista):
-    n = len(lista)
-    for i in range(n):
-        for j in range(0, n-i-1):
-            if lista[j] > lista[j+1]:
-                lista[j], lista[j+1] = lista[j+1], lista[j]
-    return lista
-entrada = input("Digite os números separados por espaço: ")
-numeros = list(map(int, entrada.split()))
-lista_ordenada = bubble_sort(numeros)
-print("Lista ordenada:", lista_ordenada)
+# def bubble_sort(lista):
+#     n = len(lista)
+#     for i in range(n):
+#         for j in range(0, n-i-1):
+#             if lista[j] > lista[j+1]:
+#                 lista[j], lista[j+1] = lista[j+1], lista[j]
+#     return lista
+# entrada = input("Digite os números separados por espaço: ")
+# numeros = list(map(int, entrada.split()))
+# lista_ordenada = bubble_sort(numeros)
+# print("Lista ordenada:", lista_ordenada)
 
 #############################################################################################################################################
 #7 - Faça um programa que converta uma temperatura de Celsius para Fahrenheit e vice-versa. O usuário deverá escolher a conversão desejada.
+# def celsius_para_fahrenheit(celsius):
+#     return (celsius * 9/5) + 32
+
+# def fahrenheit_para_celsius(fahrenheit):
+#     return (fahrenheit - 32) * 5/9
+
+# def main():
+#     print("Escolha a conversão desejada:")
+#     print("1: Celsius para Fahrenheit")
+#     print("2: Fahrenheit para Celsius")
+    
+#     escolha = input("Digite 1 ou 2: ")
+    
+#     if escolha == '1':
+#         celsius = float(input("Digite a temperatura em Celsius: "))
+#         fahrenheit = celsius_para_fahrenheit(celsius)
+#         print(f"{celsius}°C é igual a {fahrenheit:.2f}°F")
+#     elif escolha == '2':
+#         fahrenheit = float(input("Digite a temperatura em Fahrenheit: "))
+#         celsius = fahrenheit_para_celsius(fahrenheit)
+#         print(f"{fahrenheit}°F é igual a {celsius:.2f}°C")
+#     else:
+#         print("Escolha inválida!")
+
+
+# main()
 
 #8 - Crie um algoritmo que receba 5 números e exiba o maior e o menor número informados
+def encontrar_maior_menor():
+    numeros = []
+
+
+    for i in range(5):
+        num = float(input(f"Digite o {i + 1}º número: "))
+        numeros.append(num)
+
+
+    maior = max(numeros)
+    menor = min(numeros)
+
+
+    print(f"O maior número informado é: {maior}")
+    print(f"O menor número informado é: {menor}")
+
+
+encontrar_maior_menor()
