@@ -68,6 +68,14 @@
 #     print(f"Os primeiros {n} da sequência de Fibonacci são: {termos}")
 
 #6 - Escreva um algoritmo que receba uma lista de números e retorne a lista ordenada de forma crescente (Bubble sort).
+def ordena (numeros):
+    return sorted(numeros)
+
+numeros = []
+for x in range (5):
+    
+
+
 
 #7 - Faça um programa que converta uma temperatura de Celsius para Fahrenheit e vice-versa. O usuário deverá escolher a conversão desejada.
 
