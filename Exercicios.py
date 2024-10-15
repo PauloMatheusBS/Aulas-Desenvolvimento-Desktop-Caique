@@ -53,7 +53,22 @@
 # primo(entrada)
 #############################################################################################################################################
 #5  - Desenvolva uma função que mostre os n primeiros termos da sequência de Fibonacci, onde n é informado pelo usuário.
-#for _ in range(n):     seq.append(a)     a, b = b, a + b
+# def fibonacci(n):
+#     a, b = 0, 1
+#     sequencia = []
+#     for _ in range(n):
+#         sequencia.append(a)
+#         a, b = b, a + b  
+#     return sequencia
+# n = int(input("Digite o número da sequência de Fibonacci que vc quer ver: "))
+# if n <= 0:
+#     print("Por favor, digite um número positivo.")
+# else:
+#     termos = fibonacci(n)
+#     print(f"Os primeiros {n} da sequência de Fibonacci são: {termos}")
+
 #6 - Escreva um algoritmo que receba uma lista de números e retorne a lista ordenada de forma crescente (Bubble sort).
+
 #7 - Faça um programa que converta uma temperatura de Celsius para Fahrenheit e vice-versa. O usuário deverá escolher a conversão desejada.
+
 #8 - Crie um algoritmo que receba 5 números e exiba o maior e o menor número informados
