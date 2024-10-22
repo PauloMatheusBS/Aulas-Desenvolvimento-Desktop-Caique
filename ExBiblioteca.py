@@ -1,31 +1,26 @@
 class Usuario():
-    def __init__(self, id, nome):
-        self.id = id
-        self.nome = nome
-        
-    def pegarlivro():
-        print("pegou o livro")
-        
-
-
-class Livro():
-    def __init__(self, titulo, autor, genero, codigo, status):
+    def __init__(self,titulo,autor,genero,cod_livro):
         self.titulo = titulo
         self.autor = autor
         self.genero = genero
-        self.codigo = codigo
-        self.status = status
+        self.status = "Disponivel"
+        self.cod_livro = cod_livro
+        self.usuario = None
 
-    def emprestar():
-        print("O livro foi emprestado")
+    def emprestar_livro(self,usuario):
+        if self.status != "Disponivel":
+            return
+        self.usuario = usuario
+        self.status = "Emprestado"
+
+    def devolver_livro(self):
+        if self.status != "Emprestado":
+            return
+        self.usuario = None
+        self.status = "Disponivel"
 
 
 
-class Biblioteca():
-    @staticmethod
-    def gerenciaremprestimo():
-        print("Testando")
-        
 
 
 
@@ -39,30 +34,6 @@ emprestimo1 = Biblioteca()
 emprestimo1.gerenciaremprestimo()
 
 ###################################################################################################################
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 class Usuario:
     MAX_EMPRESTIMO = 5
@@ -138,7 +109,7 @@ class Biblioteca:
                 return True
         return False
 
-class InterfaceCRUD:
+class Interface:
     @staticmethod
     def criar_usuario(nome, id_usuario):
         Biblioteca.cadastrar_usuario(nome, id_usuario)
