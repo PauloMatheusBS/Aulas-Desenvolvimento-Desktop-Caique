@@ -29,7 +29,12 @@ class Usuario():
         self.lista_livros = []
 
     def pegar_emprestado(self,livro):
-        if len(self.lista_livros) > 3:
+        if len(self.lista_livros) == self.MAX_emprestimo:
+            return "Limite atingido"
+        
+        self.lista_livros.append(livro.nome)
+
+    
             
         
 
