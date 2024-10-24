@@ -1,16 +1,44 @@
 from Livros import Livro
 from Usuarios import Usuario
+from Bibliotecas import Biblioteca 
 
 
 
 rafaela = Usuario("Rafaela", "501651651065","654645654645")
 print(vars(rafaela))
-    
 don_casmurro = Livro("Don Casmurro","Machado de Assis", "Drama", "2165165165")
 print(vars(don_casmurro))            
+incidente_antares = Livro("Incidente Antares","Erico Verissimo", "Drama", "2654545165")
+print(vars(don_casmurro))
+teste1 = Livro("Teste 1","Machado de Assis", "Drama", "46456465")
+print(vars(don_casmurro))
+teste2 = Livro("Teste 2","Machado de Assis", "Drama", "4564654548")
+print(vars(don_casmurro))
+teste3 = Livro("Teste 3","Machado de Assis", "Drama", "68746581654")
+print(vars(don_casmurro))
+
+
+Biblioteca.Acervo.append(don_casmurro)
+Biblioteca.Acervo.append(incidente_antares)
+Biblioteca.Acervo.append(teste1)
+Biblioteca.Acervo.append(teste2)
+Biblioteca.Acervo.append(teste3)
+
+# rafaela.pegar_emprestado(don_casmurro)
+# rafaela.pegar_emprestado(incidente_antares)
+# rafaela.pegar_emprestado(teste1)
+# rafaela.pegar_emprestado(teste2)
+# rafaela.pegar_emprestado(teste3)
+
+# don_casmurro.emprestar_livro(rafaela)
+# incidente_antares.emprestar_livro(rafaela)
+# teste1.emprestar_livro(rafaela)
+# teste2.emprestar_livro(rafaela)
+# teste3.emprestar_livro(rafaela)
         
-rafaela.pegar_emprestado(don_casmurro)
-print(vars(rafaela))
+# print(vars(rafaela))
+# print(vars(rafaela))
+
 
 
 
