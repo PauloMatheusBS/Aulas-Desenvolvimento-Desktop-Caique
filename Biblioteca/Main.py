@@ -9,13 +9,20 @@ try:
         user='suporte',
         password='suporte',
         database='biblioteca',
-        
     )
 
     if conexao.is_connected():
         print("Conexão bem-sucedida!")
-    else:
-        print("Falha na conexão.")
+        
+        cursor = conexao.cursor()
+        print(dir(conexao))
+
+        
+        cursor.execute('INSERT INTO livro(titulo, autor, genero, status_livro, codigo) VALUES ("O pequeno principe", "Enzo", "Fantasia", "Disponivel", 5106106)')
+        
+        
+        conexao.commit()
+        print("Registro inserido com sucesso.")
 
 except mysql.connector.Error as err:
     print(f"Erro: {err}")
@@ -24,6 +31,22 @@ finally:
     if 'conexao' in locals() and conexao.is_connected():
         conexao.close()
         print("Conexão encerrada.")
+
+
+
+#     else:
+#         print("Falha na conexão.")
+
+# except mysql.connector.Error as err:
+#     print(f"Erro: {err}")
+
+# finally:
+#     if 'conexao' in locals() and conexao.is_connected():
+#         conexao.close()
+#         print("Conexão encerrada.")
+
+
+
 
 
 # import pymysql
