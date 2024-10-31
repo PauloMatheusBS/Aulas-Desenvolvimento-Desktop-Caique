@@ -1,21 +1,19 @@
-from Bibliotecas import Biblioteca
-from Livros import Livro
-from Usuarios import Usuario
+#from Bibliotecas import Biblioteca
+#from Livros import Livro
+#from Usuarios import Usuario
 import mysql.connector
 
 try:
-
     conexao = mysql.connector.connect(
-        host = '10.28.2.59',
-        user = 'suporte',
-        password = 'suporte',
-        database = 'biblioteca'
+        host='10.28.2.59',
+        user='suporte',
+        password='suporte',
+        database='biblioteca',
+        
     )
-
 
     if conexao.is_connected():
         print("Conexão bem-sucedida!")
-        print(vars(conexao))
     else:
         print("Falha na conexão.")
 
@@ -23,152 +21,169 @@ except mysql.connector.Error as err:
     print(f"Erro: {err}")
 
 finally:
-
     if 'conexao' in locals() and conexao.is_connected():
         conexao.close()
         print("Conexão encerrada.")
 
-rafaela = Usuario("Rafaela", "501651651065","654645654645")
-print(vars(rafaela))
-don_casmurro = Livro("Don Casmurro","Machado de Assis", "Drama", "2165165165")
-print(vars(don_casmurro))            
-incidente_antares = Livro("Incidente Antares","Erico Verissimo", "Drama", "2654545165")
-print(vars(don_casmurro))
-teste1 = Livro("Teste 1","Machado de Assis", "Drama", "46456465")
-print(vars(don_casmurro))
-teste2 = Livro("Teste 2","Machado de Assis", "Drama", "4564654548")
-print(vars(don_casmurro))
-teste3 = Livro("Teste 3","Machado de Assis", "Drama", "68746581654")
-print(vars(don_casmurro))
-Biblioteca.Acervo.append(don_casmurro)
-Biblioteca.Acervo.append(incidente_antares)
-Biblioteca.Acervo.append(teste1)
-Biblioteca.Acervo.append(teste2)
-Biblioteca.Acervo.append(teste3)
 
-rafaela.pegar_emprestado(don_casmurro)
-rafaela.pegar_emprestado(incidente_antares)
-rafaela.pegar_emprestado(teste1)
-rafaela.pegar_emprestado(teste2)
-rafaela.pegar_emprestado(teste3)
+# import pymysql
 
-don_casmurro.emprestar_livro(rafaela)
-incidente_antares.emprestar_livro(rafaela)
-teste1.emprestar_livro(rafaela)
-teste2.emprestar_livro(rafaela)
-teste3.emprestar_livro(rafaela)
+# try:
+#     conexao = pymysql.connect(
+#         host='10.28.2.59',
+#         user='suporte',
+#         password='suporte',
+#         database='biblioteca'
+#     )
+
+#     if conexao.open:
+#         print("Conexão bem-sucedida!")
+#         print(vars(conexao))
+#     else:
+#         print("Falha na conexão.")
+
+# except pymysql.MySQLError as err:
+#     print(f"Erro: {err}")
+
+# finally:
+#     if 'conexao' in locals() and conexao.open:
+#         conexao.close()
+#         print("Conexão encerrada.")
+
+
+
+# rafaela = Usuario("Rafaela", "501651651065","654645654645")
+# print(vars(rafaela))
+# don_casmurro = Livro("Don Casmurro","Machado de Assis", "Drama", "2165165165")
+# print(vars(don_casmurro))            
+# incidente_antares = Livro("Incidente Antares","Erico Verissimo", "Drama", "2654545165")
+# print(vars(don_casmurro))
+# teste1 = Livro("Teste 1","Machado de Assis", "Drama", "46456465")
+# print(vars(don_casmurro))
+# teste2 = Livro("Teste 2","Machado de Assis", "Drama", "4564654548")
+# print(vars(don_casmurro))
+# teste3 = Livro("Teste 3","Machado de Assis", "Drama", "68746581654")
+# print(vars(don_casmurro))
+# Biblioteca.Acervo.append(don_casmurro)
+# Biblioteca.Acervo.append(incidente_antares)
+# Biblioteca.Acervo.append(teste1)
+# Biblioteca.Acervo.append(teste2)
+# Biblioteca.Acervo.append(teste3)
+
+# rafaela.pegar_emprestado(don_casmurro)
+# rafaela.pegar_emprestado(incidente_antares)
+# rafaela.pegar_emprestado(teste1)
+# rafaela.pegar_emprestado(teste2)
+# rafaela.pegar_emprestado(teste3)
+
+# don_casmurro.emprestar_livro(rafaela)
+# incidente_antares.emprestar_livro(rafaela)
+# teste1.emprestar_livro(rafaela)
+# teste2.emprestar_livro(rafaela)
+# teste3.emprestar_livro(rafaela)
         
-print(vars(rafaela))
-print(vars(rafaela))
+# print(vars(rafaela))
+# print(vars(rafaela))
+# emprestimo1 = Biblioteca()
+# emprestimo1.gerenciaremprestimo()
 
+# ####################################################################################################################################################################################################################################
 
+# class Usuario:
+#     MAX_EMPRESTIMO = 5
 
+#     def __init__(self, nome, id_usuario):
+#         self.nome = nome
+#         self.id_usuario = id_usuario
+#         self.emprestimos = []
 
-crie uma classe usuario com seus atributos e com uma constante de MAX_EMPRESTIMO para identificar a quantidade maxima permitida.
-crie uma classe para livros que tenha os metodos de emprestimo, cadastro, listar e atributos
-crie uma classe estatica que implemente uma Bibliotecaque consiga realizar o emprestimo e devolução
-defina uma interface que para realizar o CRUD tanto de usuario quanto de livro        
+#     def emprestar(self, livro):
+#         if len(self.emprestimos) < Usuario.MAX_EMPRESTIMO:
+#             self.emprestimos.append(livro)
+#             return True
+#         return False
 
-emprestimo1 = Biblioteca()
-emprestimo1.gerenciaremprestimo()
+#     def devolver(self, livro):
+#         if livro in self.emprestimos:
+#             self.emprestimos.remove(livro)
+#             return True
+#         return False
 
-##################################################################################################################
+# class Livro:
+#     def __init__(self, titulo, autor, id_livro):
+#         self.titulo = titulo
+#         self.autor = autor
+#         self.id_livro = id_livro
+#         self.disponivel = True
 
-class Usuario:
-    MAX_EMPRESTIMO = 5
+#     def cadastrar(self):
+#         return {"titulo": self.titulo, "autor": self.autor, "id_livro": self.id_livro}
 
-    def __init__(self, nome, id_usuario):
-        self.nome = nome
-        self.id_usuario = id_usuario
-        self.emprestimos = []
+# class Biblioteca:
+#     usuarios = []
+#     livros = []
 
-    def emprestar(self, livro):
-        if len(self.emprestimos) < Usuario.MAX_EMPRESTIMO:
-            self.emprestimos.append(livro)
-            return True
-        return False
+#     @staticmethod
+#     def cadastrar_usuario(nome, id_usuario):
+#         usuario = Usuario(nome, id_usuario)
+#         Biblioteca.usuarios.append(usuario)
 
-    def devolver(self, livro):
-        if livro in self.emprestimos:
-            self.emprestimos.remove(livro)
-            return True
-        return False
+#     @staticmethod
+#     def cadastrar_livro(titulo, autor, id_livro):
+#         livro = Livro(titulo, autor, id_livro)
+#         Biblioteca.livros.append(livro)
 
-class Livro:
-    def __init__(self, titulo, autor, id_livro):
-        self.titulo = titulo
-        self.autor = autor
-        self.id_livro = id_livro
-        self.disponivel = True
+#     @staticmethod
+#     def listar_usuarios():
+#         return [usuario.nome for usuario in Biblioteca.usuarios]
 
-    def cadastrar(self):
-        return {"titulo": self.titulo, "autor": self.autor, "id_livro": self.id_livro}
+#     @staticmethod
+#     def listar_livros():
+#         return [livro.cadastrar() for livro in Biblioteca.livros]
 
-class Biblioteca:
-    usuarios = []
-    livros = []
+#     @staticmethod
+#     def emprestar_livro(id_usuario, id_livro):
+#         usuario = next((u for u in Biblioteca.usuarios if u.id_usuario == id_usuario), None)
+#         livro = next((l for l in Biblioteca.livros if l.id_livro == id_livro), None)
 
-    @staticmethod
-    def cadastrar_usuario(nome, id_usuario):
-        usuario = Usuario(nome, id_usuario)
-        Biblioteca.usuarios.append(usuario)
+#         if usuario and livro and livro.disponivel:
+#             if usuario.emprestar(livro):
+#                 livro.disponivel = False
+#                 return True
+#         return False
 
-    @staticmethod
-    def cadastrar_livro(titulo, autor, id_livro):
-        livro = Livro(titulo, autor, id_livro)
-        Biblioteca.livros.append(livro)
+#     @staticmethod
+#     def devolver_livro(id_usuario, id_livro):
+#         usuario = next((u for u in Biblioteca.usuarios if u.id_usuario == id_usuario), None)
+#         livro = next((l for l in Biblioteca.livros if l.id_livro == id_livro), None)
 
-    @staticmethod
-    def listar_usuarios():
-        return [usuario.nome for usuario in Biblioteca.usuarios]
+#         if usuario and livro and not livro.disponivel:
+#             if usuario.devolver(livro):
+#                 livro.disponivel = True
+#                 return True
+#         return False
 
-    @staticmethod
-    def listar_livros():
-        return [livro.cadastrar() for livro in Biblioteca.livros]
+# class Interface:
+#     @staticmethod
+#     def criar_usuario(nome, id_usuario):
+#         Biblioteca.cadastrar_usuario(nome, id_usuario)
 
-    @staticmethod
-    def emprestar_livro(id_usuario, id_livro):
-        usuario = next((u for u in Biblioteca.usuarios if u.id_usuario == id_usuario), None)
-        livro = next((l for l in Biblioteca.livros if l.id_livro == id_livro), None)
+#     @staticmethod
+#     def criar_livro(titulo, autor, id_livro):
+#         Biblioteca.cadastrar_livro(titulo, autor, id_livro)
 
-        if usuario and livro and livro.disponivel:
-            if usuario.emprestar(livro):
-                livro.disponivel = False
-                return True
-        return False
+#     @staticmethod
+#     def listar_usuarios():
+#         return Biblioteca.listar_usuarios()
 
-    @staticmethod
-    def devolver_livro(id_usuario, id_livro):
-        usuario = next((u for u in Biblioteca.usuarios if u.id_usuario == id_usuario), None)
-        livro = next((l for l in Biblioteca.livros if l.id_livro == id_livro), None)
+#     @staticmethod
+#     def listar_livros():
+#         return Biblioteca.listar_livros()
 
-        if usuario and livro and not livro.disponivel:
-            if usuario.devolver(livro):
-                livro.disponivel = True
-                return True
-        return False
+#     @staticmethod
+#     def emprestar_livro(id_usuario, id_livro):
+#         return Biblioteca.emprestar_livro(id_usuario, id_livro)
 
-class Interface:
-    @staticmethod
-    def criar_usuario(nome, id_usuario):
-        Biblioteca.cadastrar_usuario(nome, id_usuario)
-
-    @staticmethod
-    def criar_livro(titulo, autor, id_livro):
-        Biblioteca.cadastrar_livro(titulo, autor, id_livro)
-
-    @staticmethod
-    def listar_usuarios():
-        return Biblioteca.listar_usuarios()
-
-    @staticmethod
-    def listar_livros():
-        return Biblioteca.listar_livros()
-
-    @staticmethod
-    def emprestar_livro(id_usuario, id_livro):
-        return Biblioteca.emprestar_livro(id_usuario, id_livro)
-
-    @staticmethod
-    def devolver_livro(id_usuario, id_livro):
-        return Biblioteca.devolver_livro(id_usuario, id_livro)
+#     @staticmethod
+#     def devolver_livro(id_usuario, id_livro):
+#         return Biblioteca.devolver_livro(id_usuario, id_livro)
