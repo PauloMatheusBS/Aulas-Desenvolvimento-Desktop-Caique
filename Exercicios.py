@@ -1,18 +1,19 @@
 # Lista de Exercícios (10/10)
 
 #1 - Crie uma função que calcule o fatorial de um número dado pelo usuário.
-# def fatorial(n):
-#     if n < 0:
-#         return "Deu RUIM, n pode ser negativo"
-#     elif n == 0 or n == 1:
-#         return 1
-#     else:
-#         resultado = 1
-#         for i in range(2, n + 1):
-#             resultado *= i
-#         return resultado
-# num = int(input("Digite um número: "))
-# print(f"O fatorial de {num} é {fatorial(num)}.")
+def fatorial(n):
+    if n < 0:
+        return "Deu RUIM, n pode ser negativo"
+    elif n == 0 or n == 1:
+        return 1
+    else:
+        resultado = 1
+        for i in range(2, n + 1):
+            resultado *= i
+        return resultado
+num = int(input("Digite um número: "))
+print(f"O fatorial de {num} é {fatorial(num)}.")
+print("Meu nome é ", "teste" , end="####")
 
 #############################################################################################################################################
 #2 - Desenvolva um programa que mostre a tabuada de um número informado pelo usuário.

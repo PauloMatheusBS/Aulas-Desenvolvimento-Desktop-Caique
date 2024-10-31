@@ -10,6 +10,10 @@ class Livro():
     def emprestar_livro(self,usuario):
         if self.status != "Disponivel":
             return
+        
+        if len(usuario.lista_livros) == usuario.MAX_emprestimo:
+            return "Maximo Atingido"
+
         self.usuario = usuario
         self.status = "Emprestado"
 
