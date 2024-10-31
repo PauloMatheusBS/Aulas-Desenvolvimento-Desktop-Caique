@@ -16,13 +16,64 @@ try:
         
         cursor = conexao.cursor()
         print(dir(conexao))
-
         
-        cursor.execute('INSERT INTO livro(titulo, autor, genero, status_livro, codigo) VALUES ("O pequeno principe", "Enzo", "Fantasia", "Disponivel", 5106106)')
-        
-        
+        cursor.execute('INSERT INTO livro(titulo, autor, genero, status_livro, codigo) VALUES ("O pequeno principe", "Enzo", "Fantasia", "Disponivel", 5106106)') # Inserindo um registro
         conexao.commit()
         print("Registro inserido com sucesso.")
+
+        cursor.execute('INSERT INTO livro(titulo, autor, genero, status_livro, codigo) VALUES ("Nome teste", "Enzo", "Drama", "Disponivel", 464654)') # Inserindo um registro
+        conexao.commit()
+        print("Registro inserido com sucesso.")
+
+        
+        cursor.execute('UPDATE livro SET status_livro = "Indisponivel" WHERE titulo = "O pequeno principe" AND autor = "Enzo"') # Atualizando um registro
+        conexao.commit()
+        print("Registro atualizado com sucesso.")
+
+        
+        cursor.execute('DELETE FROM livro WHERE titulo = "O pequeno principe" AND autor = "Enzo"') # Deletando um registro
+        conexao.commit()
+        print("Registro deletado com sucesso.")
+
+        
+        cursor.execute('SELECT * FROM livro ') # Selecionando registros
+        resultados = cursor.fetchall()
+        print(resultados)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 except mysql.connector.Error as err:
     print(f"Erro: {err}")
@@ -31,6 +82,7 @@ finally:
     if 'conexao' in locals() and conexao.is_connected():
         conexao.close()
         print("Conexão encerrada.")
+
 
 
 
