@@ -17,26 +17,26 @@ try:
         cursor = conexao.cursor()
         print(dir(conexao))
         
-        cursor.execute('INSERT INTO livro(titulo, autor, genero, status_livro, codigo) VALUES ("O pequeno principe", "Enzo", "Fantasia", "Disponivel", 5106106)') # Inserindo um registro
+        cursor.execute('INSERT INTO livro(titulo, autor, genero, status_livro, codigo) VALUES ("O pequeno principe", "Enzo", "Fantasia", "Disponivel", 5106106)') 
         conexao.commit()
         print("Registro inserido com sucesso.")
 
-        cursor.execute('INSERT INTO livro(titulo, autor, genero, status_livro, codigo) VALUES ("Nome teste", "Enzo", "Drama", "Disponivel", 464654)') # Inserindo um registro
+        cursor.execute('INSERT INTO livro(titulo, autor, genero, status_livro, codigo) VALUES ("Nome teste", "Enzo", "Drama", "Disponivel", 464654)') 
         conexao.commit()
         print("Registro inserido com sucesso.")
 
         
-        cursor.execute('UPDATE livro SET status_livro = "Indisponivel" WHERE titulo = "O pequeno principe" AND autor = "Enzo"') # Atualizando um registro
+        cursor.execute('UPDATE livro SET status_livro = "Indisponivel" WHERE titulo = "O pequeno principe" AND autor = "Enzo"')
         conexao.commit()
         print("Registro atualizado com sucesso.")
 
         
-        cursor.execute('DELETE FROM livro WHERE titulo = "O pequeno principe" AND autor = "Enzo"') # Deletando um registro
+        cursor.execute('DELETE FROM livro WHERE titulo = "O pequeno principe" AND autor = "Enzo"')
         conexao.commit()
         print("Registro deletado com sucesso.")
 
         
-        cursor.execute('SELECT * FROM livro ') # Selecionando registros
+        cursor.execute('SELECT * FROM livro ') 
         resultados = cursor.fetchall()
         print(resultados)
 

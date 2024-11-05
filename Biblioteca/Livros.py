@@ -22,3 +22,5 @@ class Livro():
             return
         self.usuario = None
         self.status = "Disponivel"
+
+
