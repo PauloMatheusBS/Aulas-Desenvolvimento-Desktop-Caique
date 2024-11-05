@@ -5,14 +5,6 @@ from mysql.connector import Error
 
 class Database:
     def __init__(self, host, user, password, database):
-        """
-        Inicializa a classe Database com as credenciais de acesso.
-        
-        :param host: O endereço do servidor MySQL (por exemplo, 'localhost').
-        :param user: O nome de usuário para autenticação no MySQL.
-        :param password: A senha do usuário para autenticação.
-        :param database: O nome do banco de dados para se conectar.
-        """
         self.host = host
         self.user = user
         self.password = password
@@ -20,9 +12,6 @@ class Database:
         self.connection = None
 
     def connect(self):
-        """
-        Conecta ao banco de dados MySQL utilizando as credenciais fornecidas.
-        """
         try:
             self.connection = mysql.connector.connect(
                 host=self.host,
@@ -38,25 +27,18 @@ class Database:
             self.connection = None
 
     def disconnect(self):
-        """
-        Desconecta do banco de dados MySQL se estiver conectado.
-        """
         if self.connection is not None and self.connection.is_connected():
             self.connection.close()
             print(f"Desconectado do banco de dados {self.database}.")
         else:
             print("Nenhuma conexão ativa para desconectar.")
 
-# Exemplo de uso da classe
-if __name__ == "__main__":
-    # Defina suas credenciais de acesso ao banco de dados
-    db = Database(host='localhost', user='root', password='sua_senha', database='nome_do_banco')
 
-    # Conectando ao banco de dados
-    db.connect()
 
-    # Desconectando do banco de dados
-    db.disconnect()
+    
+db = Database(host='10.28.2.59', user='suporte', password='suporte', database='conexao')
+db.connect()
+db.disconnect()
 
 
 
