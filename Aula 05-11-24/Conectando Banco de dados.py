@@ -17,11 +17,12 @@ class Database:
                 host=self.host,
                 user=self.user,
                 password=self.password,
-                database=self.database
+                database=self.database,
             )
 
             if self.connection.is_connected():
                 print(f"Conectado ao banco de dados {self.database} com sucesso.")
+                
         except Error as e:
             print(f"Erro ao conectar ao banco de dados: {e}")
             self.connection = None
@@ -37,6 +38,9 @@ class Database:
 db = Database(host='10.28.2.59', user='suporte', password='suporte', database='conexao')
 db.connect()
 db.disconnect()
+
+
+
 
 
 
