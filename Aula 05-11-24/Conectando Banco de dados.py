@@ -34,8 +34,6 @@ class Database:
             print("Nenhuma conexão ativa para desconectar.")
 
 
-
-    
 db = Database(host='10.28.2.59', user='suporte', password='suporte', database='conexao')
 db.connect()
 db.disconnect()
