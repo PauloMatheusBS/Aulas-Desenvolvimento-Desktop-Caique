@@ -1,87 +1,93 @@
 from Model.livros import Livros
-from Model.main import Database 
+from Model.main import Database
 
 class ControllerLivro:
-    def cadastrarLivro(self):
-        bd = Database("10.28.2.59", "suporte", "suporte", "biblioteca")
-        bd.conectar()
+    def __init__(self):
+        """Inicializa a conexão com o banco de dados."""
+        self.bd = Database("10.28.2.59", "suporte", "suporte", "biblioteca")
 
-        livro = Livros("Dom Casmuurro", "Machado de Assis", "Suspense", 123)
-        self.livro = Livros("Dom Casmuurro", "Machado de Assis", "Suspense", 123)
+    def conectar_bd(self):
+        """Método para conectar ao banco de dados."""
+        self.bd.conectar()
+
+    def desconectar_bd(self):
+        """Método para desconectar do banco de dados."""
+        self.bd.desconectar()
+
+    def cadastrarLivro(self, titulo, autor, genero, codigo):
+        """Cadastrar um novo livro."""
+        livro = Livros(titulo, autor, genero, codigo)
+        self.conectar_bd()
         try:
-            bd.cursor.execute(livro.create())
-            bd.conexao.commit()
-            print("Livro cadastrado com sucesso!")
+            self.bd.cursor.execute(livro.create())
+            self.bd.conexao.commit()
+            print(f"Livro '{titulo}' cadastrado com sucesso!")
         except Exception as e:
             print(f"Erro ao cadastrar livro: {e}")
-            bd.conexao.rollback()
+            self.bd.conexao.rollback()
         finally:
-            bd.desconectar()
+            self.desconectar_bd()
 
-    def excluirLivro(self):
-        bd = Database("10.28.2.59", "suporte", "suporte", "biblioteca")
-        bd.conectar()
-
-        livro = Livros("Dom Casmurro", "Machado de Assis", "Suspense", 123)
+    def excluirLivro(self, id_livro):
+        """Excluir um livro pelo ID."""
+        livro = Livros(titulo=None, autor=None, genero=None, codigo=None)
+        livro.id_livro = id_livro
+        self.conectar_bd()
         try:
-            bd.cursor.execute(livro.delete())
-            bd.conexao.commit()
-            print("Livro excluído com sucesso!")
+            self.bd.cursor.execute(livro.delete())
+            self.bd.conexao.commit()
+            print(f"Livro de ID {id_livro} excluído com sucesso!")
         except Exception as e:
             print(f"Erro ao excluir livro: {e}")
-            bd.conexao.rollback()
+            self.bd.conexao.rollback()
         finally:
-            bd.desconectar()
+            self.desconectar_bd()
 
-    def atualizarLivro(self):
-        bd = Database("10.28.2.59", "suporte", "suporte", "biblioteca")
-        bd.conectar()
-
-        livro = Livros("Dom Casmurro", "Machado de Assis", "Suspense", 123)
-        novo_titulo = "Dom Casmurro - Edição Atualizada"
-        novo_autor = "Machado de Assis"
-        novo_status = "Indisponível"
+    def atualizarLivro(self, id_livro, novo_titulo=None, novo_autor=None, novo_genero=None, novo_status=None):
+        """Atualizar informações de um livro."""
+        livro = Livros(titulo=None, autor=None, genero=None, codigo=None)
+        livro.id_livro = id_livro
+        self.conectar_bd()
         try:
-            bd.cursor.execute(livro.update(novo_titulo=novo_titulo, novo_autor=novo_autor, novo_status=novo_status))
-            bd.conexao.commit()
-            print("Livro atualizado com sucesso!")
+            self.bd.cursor.execute(livro.update(novo_titulo, novo_autor, novo_genero, novo_status))
+            self.bd.conexao.commit()
+            print(f"Livro de ID {id_livro} atualizado com sucesso!")
         except Exception as e:
             print(f"Erro ao atualizar livro: {e}")
-            bd.conexao.rollback()
+            self.bd.conexao.rollback()
         finally:
-            bd.desconectar()
+            self.desconectar_bd()
 
-    def consultarLivro(self):
-        bd = Database("10.28.2.59", "suporte", "suporte", "biblioteca")
-        bd.conectar()
+    def consultarLivro(self, id_livro):
+        """Consultar um livro pelo ID."""
+        livro = Livros(titulo=None, autor=None, genero=None, codigo=None)
+        livro.id_livro = id_livro
+        self.conectar_bd()
+        try:
+            self.bd.cursor.execute(livro.select())
+            resultado = self.bd.cursor.fetchall()
+            if resultado:
+                for linha in resultado:
+                    print(linha)
+            else:
+                print(f"Nenhum livro encontrado com o ID {id_livro}.")
+        except Exception as e:
+            print(f"Erro ao consultar livro: {e}")
+        finally:
+            self.desconectar_bd()
 
-        livro = self.livro
-        #try:
-        bd.cursor.execute(livro.select())
-        resultado = bd.cursor.fetchall()
-        for linha in resultado:
-            print(linha)  
-        #     else:
-        #         print("Livro não encontrado.")
-        # except Exception as e:
-        #     print(f"Erro ao consultar livro: {e}")
-        # finally:
-        #     bd.desconectar()
+# Exemplo de uso da ControllerLivro
 
- 
+controladora_livro = ControllerLivro()
 
+# Cadastrar livro
+controladora_livro.cadastrarLivro(titulo="Dom Casmurro", autor="Machado de Assis", genero="Suspense", codigo=123)
 
+# Consultar livro
+controladora_livro.consultarLivro(id_livro=123)
 
-controladora = ControllerLivro()
+# Atualizar livro
+controladora_livro.atualizarLivro(id_livro=123, novo_titulo="Dom Casmurro - Edição Atualizada", novo_status="Indisponível")
 
-controladora.cadastrarLivro()
-
-controladora.consultarLivro()
-
-controladora.atualizarLivro()
-
-controladora.excluirLivro()
-
-
-
-
+# Excluir livro
+controladora_livro.excluirLivro(id_livro=123)

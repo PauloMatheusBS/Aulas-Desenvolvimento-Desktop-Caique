@@ -2,77 +2,85 @@ from Model.usuario import Usuario
 from Model.main import Database
 
 class ControllerUsuario:
-    def cadastrarUsuario(self):
-        bd = Database("10.28.2.59", "suporte", "suporte", "biblioteca")
-        bd.conectar()
+    def __init__(self):
+        # Conexão com o banco de dados
+        self.bd = Database("10.28.2.59", "suporte", "suporte", "biblioteca")
 
-        usuario = Usuario("João Silva", "123.456.789-00", "99999-8888")
+    def cadastrar_usuario(self, nome, cpf, telefone):
+        """Cadastrar um novo usuário na base de dados."""
+        usuario = Usuario(nome, cpf, telefone)
+        self.bd.conectar()
         try:
-            bd.cursor.execute(usuario.create())
-            bd.conexao.commit()
+  
+            self.bd.cursor.execute(usuario.create())
+            self.bd.conexao.commit()
             print("Usuário cadastrado com sucesso!")
         except Exception as e:
             print(f"Erro ao cadastrar usuário: {e}")
-            bd.conexao.rollback()
+            self.bd.conexao.rollback()
         finally:
-            bd.desconectar()
+            self.bd.desconectar()
 
-    def excluirUsuario(self):
-        bd = Database("10.28.2.59", "suporte", "suporte", "biblioteca")
-        bd.conectar()
-
-        usuario = Usuario("João Silva", "123.456.789-00", "99999-8888")
-        usuario.id_usuario = 1  
+    def excluir_usuario(self, id_usuario):
+        """Excluir um usuário existente."""
+        usuario = Usuario(nome=None, cpf=None, telefone=None)  
+        usuario.id_usuario = id_usuario
+        self.bd.conectar()
         try:
-            bd.cursor.execute(usuario.delete())
-            bd.conexao.commit()
+            self.bd.cursor.execute(usuario.delete())
+            self.bd.conexao.commit()
             print("Usuário excluído com sucesso!")
         except Exception as e:
             print(f"Erro ao excluir usuário: {e}")
-            bd.conexao.rollback()
+            self.bd.conexao.rollback()
         finally:
-            bd.desconectar()
+            self.bd.desconectar()
 
-    def atualizarUsuario(self):
-        bd = Database("10.28.2.59", "suporte", "suporte", "biblioteca")
-        bd.conectar()
-
-        usuario = Usuario("João Silva", "123.456.789-00", "99999-8888")
-        usuario.id_usuario = 1  
-        novo_nome = "João Silva Jr."
-        novo_telefone = "98765-4321"
+    def atualizar_usuario(self, id_usuario, novo_nome=None, novo_cpf=None, novo_telefone=None):
+        """Atualizar dados de um usuário."""
+        usuario = Usuario(nome=novo_nome, cpf=novo_cpf, telefone=novo_telefone)
+        usuario.id_usuario = id_usuario
+        self.bd.conectar()
         try:
-            bd.cursor.execute(usuario.update(novo_nome=novo_nome, novo_telefone=novo_telefone))
-            bd.conexao.commit()
+            self.bd.cursor.execute(usuario.update(novo_nome, novo_cpf, novo_telefone))
+            self.bd.conexao.commit()
             print("Usuário atualizado com sucesso!")
         except Exception as e:
             print(f"Erro ao atualizar usuário: {e}")
-            bd.conexao.rollback()
+            self.bd.conexao.rollback()
         finally:
-            bd.desconectar()
+            self.bd.desconectar()
 
-    def consultarUsuario(self):
-        bd = Database("10.28.2.59", "suporte", "suporte", "biblioteca")
-        bd.conectar()
-
-        usuario = Usuario("João Silva", "123.456.789-00", "99999-8888")
-        usuario.id_usuario = 1  
+    def consultar_usuario(self, id_usuario):
+        """Consultar um usuário pelo ID."""
+        usuario = Usuario(nome=None, cpf=None, telefone=None)
+        usuario.id_usuario = id_usuario
+        self.bd.conectar()
         try:
-            bd.cursor.execute(usuario.select())
-            resultado = bd.cursor.fetchall()
-            for linha in resultado:
-                print(linha)
+            self.bd.cursor.execute(usuario.select())
+            resultado = self.bd.cursor.fetchone()
+            if resultado:
+                print(f"Usuário encontrado: ID = {resultado[0]}, Nome = {resultado[1]}, CPF = {resultado[2]}, Telefone = {resultado[3]}")
+            else:
+                print("Usuário não encontrado.")
         except Exception as e:
             print(f"Erro ao consultar usuário: {e}")
         finally:
-            bd.desconectar()
+            self.bd.desconectar()
 
-
-
-controladora_usuario = ControllerUsuario()
-
-controladora_usuario.cadastrarUsuario()
-controladora_usuario.consultarUsuario()
-controladora_usuario.atualizarUsuario()
-controladora_usuario.excluirUsuario()
-
+    def listar_usuarios(self):
+        """Listar todos os usuários cadastrados."""
+        self.bd.conectar()
+        try:
+            self.bd.cursor.execute("SELECT * FROM usuario;")
+            resultado = self.bd.cursor.fetchall()
+            if resultado:
+                print("Lista de usuários cadastrados:")
+                for usuario in resultado:
+                    print(f"ID = {usuario[0]}, Nome = {usuario[1]}, CPF = {usuario[2]}, Telefone = {usuario[3]}")
+            else:
+                print("Nenhum usuário encontrado.")
+        except Exception as e:
+            print(f"Erro ao listar usuários: {e}")
+        finally:
+            self.bd.desconectar()

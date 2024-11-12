@@ -2,80 +2,106 @@ from Model.emprestimo import Emprestimo
 from Model.main import Database
 
 class ControllerEmprestimo:
-    def cadastrarEmprestimo(self):
-        bd = Database("10.28.2.59", "suporte", "suporte", "biblioteca")
-        bd.conectar()
+    def __init__(self):
+        # Conexão com o banco de dados
+        self.bd = Database("10.28.2.59", "suporte", "suporte", "biblioteca")
 
-        emprestimo = Emprestimo(id_livro=1, id_usuario=1)  
+    def conectar_bd(self):
+        """Método centralizado para conectar ao banco de dados."""
+        self.bd.conectar()
+
+    def desconectar_bd(self):
+        """Método centralizado para desconectar do banco de dados."""
+        self.bd.desconectar()
+
+    def cadastrarEmprestimo(self, id_livro, id_usuario):
+        """Cadastrar um novo empréstimo de livro para um usuário."""
+        emprestimo = Emprestimo(id_livro, id_usuario)
+        self.conectar_bd()
         try:
-            bd.cursor.execute(emprestimo.create())
-            bd.conexao.commit()
+            self.bd.cursor.execute(emprestimo.create())
+            self.bd.conexao.commit()
             print("Empréstimo cadastrado com sucesso!")
         except Exception as e:
             print(f"Erro ao cadastrar empréstimo: {e}")
-            bd.conexao.rollback()
+            self.bd.conexao.rollback()
         finally:
-            bd.desconectar()
+            self.desconectar_bd()
 
-    def excluirEmprestimo(self):
-        bd = Database("10.28.2.59", "suporte", "suporte", "biblioteca")
-        bd.conectar()
-
-        emprestimo = Emprestimo(id_livro=1, id_usuario=1)  
-        emprestimo.id_emprestimo = 1  
+    def excluirEmprestimo(self, id_emprestimo):
+        """Excluir um empréstimo existente."""
+        emprestimo = Emprestimo(id_livro=None, id_usuario=None)
+        emprestimo.id_emprestimo = id_emprestimo
+        self.conectar_bd()
         try:
-            bd.cursor.execute(emprestimo.delete())
-            bd.conexao.commit()
+            self.bd.cursor.execute(emprestimo.delete())
+            self.bd.conexao.commit()
             print("Empréstimo excluído com sucesso!")
         except Exception as e:
             print(f"Erro ao excluir empréstimo: {e}")
-            bd.conexao.rollback()
+            self.bd.conexao.rollback()
         finally:
-            bd.desconectar()
+            self.desconectar_bd()
 
-    def consultarEmprestimos(self):
-        bd = Database("10.28.2.59", "suporte", "suporte", "biblioteca")
-        bd.conectar()
-
-        emprestimo = Emprestimo(id_livro=1, id_usuario=1)  
+    def consultarEmprestimos(self, id_livro=None, id_usuario=None):
+        """Consultar empréstimos, podendo filtrar por livro ou usuário."""
+        emprestimo = Emprestimo(id_livro, id_usuario)
+        self.conectar_bd()
         try:
-            bd.cursor.execute(emprestimo.select())
-            resultado = bd.cursor.fetchall()
-            for linha in resultado:
-                print(linha)
+            # Se id_livro ou id_usuario for passado, filtra a consulta
+            if id_livro and id_usuario:
+                self.bd.cursor.execute(emprestimo.select())
+            elif id_livro:
+                emprestimo.id_livro = id_livro
+                self.bd.cursor.execute(emprestimo.select())
+            elif id_usuario:
+                emprestimo.id_usuario = id_usuario
+                self.bd.cursor.execute(emprestimo.select())
+            else:
+                print("Informe pelo menos um parâmetro para consulta (id_livro ou id_usuario).")
+                return
+
+            resultado = self.bd.cursor.fetchall()
+            if resultado:
+                for linha in resultado:
+                    print(linha)
+            else:
+                print("Nenhum empréstimo encontrado.")
         except Exception as e:
             print(f"Erro ao consultar empréstimos: {e}")
         finally:
-            bd.desconectar()
+            self.desconectar_bd()
 
     def consultarTodosEmprestimos(self):
-        bd = Database("10.28.2.59", "suporte", "suporte", "biblioteca")
-        bd.conectar()
-
-        emprestimo = Emprestimo(id_livro=None, id_usuario=None)  
+        """Consultar todos os empréstimos."""
+        emprestimo = Emprestimo(id_livro=None, id_usuario=None)
+        self.conectar_bd()
         try:
-            bd.cursor.execute(emprestimo.select_all())
-            resultado = bd.cursor.fetchall()
-            for linha in resultado:
-                print(linha)
+            self.bd.cursor.execute(emprestimo.select_all())
+            resultado = self.bd.cursor.fetchall()
+            if resultado:
+                for linha in resultado:
+                    print(linha)
+            else:
+                print("Nenhum empréstimo registrado.")
         except Exception as e:
             print(f"Erro ao consultar todos os empréstimos: {e}")
         finally:
-            bd.desconectar()
+            self.desconectar_bd()
 
-
+# Testando a Controller de Empréstimo
 
 controladora_emprestimo = ControllerEmprestimo()
 
+# Cadastrar empréstimo
+controladora_emprestimo.cadastrarEmprestimo(id_livro=1, id_usuario=1)
 
-controladora_emprestimo.cadastrarEmprestimo()
-
-
+# Consultar todos os empréstimos
 controladora_emprestimo.consultarTodosEmprestimos()
 
+# Consultar empréstimos filtrados por livro ou usuário
+controladora_emprestimo.consultarEmprestimos(id_livro=1)
+controladora_emprestimo.consultarEmprestimos(id_usuario=1)
 
-controladora_emprestimo.consultarEmprestimos()
-
-
-controladora_emprestimo.excluirEmprestimo()
-
+# Excluir um empréstimo
+controladora_emprestimo.excluirEmprestimo(id_emprestimo=1)
