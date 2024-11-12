@@ -6,7 +6,7 @@ class ControllerEmprestimo:
         bd = Database("10.28.2.59", "suporte", "suporte", "biblioteca")
         bd.conectar()
 
-        emprestimo = Emprestimo(id_livro=1, id_usuario=1)  # Exemplo de empréstimo do livro com ID 1 para o usuário com ID 1
+        emprestimo = Emprestimo(id_livro=1, id_usuario=1)  
         try:
             bd.cursor.execute(emprestimo.create())
             bd.conexao.commit()
@@ -21,8 +21,8 @@ class ControllerEmprestimo:
         bd = Database("10.28.2.59", "suporte", "suporte", "biblioteca")
         bd.conectar()
 
-        emprestimo = Emprestimo(id_livro=1, id_usuario=1)  # Exemplo de exclusão de empréstimo para o livro com ID 1 e usuário com ID 1
-        emprestimo.id_emprestimo = 1  # ID do empréstimo a ser excluído
+        emprestimo = Emprestimo(id_livro=1, id_usuario=1)  
+        emprestimo.id_emprestimo = 1  
         try:
             bd.cursor.execute(emprestimo.delete())
             bd.conexao.commit()
@@ -37,7 +37,7 @@ class ControllerEmprestimo:
         bd = Database("10.28.2.59", "suporte", "suporte", "biblioteca")
         bd.conectar()
 
-        emprestimo = Emprestimo(id_livro=1, id_usuario=1)  # Exemplo de consulta de empréstimo do livro com ID 1 para o usuário com ID 1
+        emprestimo = Emprestimo(id_livro=1, id_usuario=1)  
         try:
             bd.cursor.execute(emprestimo.select())
             resultado = bd.cursor.fetchall()
@@ -52,7 +52,7 @@ class ControllerEmprestimo:
         bd = Database("10.28.2.59", "suporte", "suporte", "biblioteca")
         bd.conectar()
 
-        emprestimo = Emprestimo(id_livro=None, id_usuario=None)  # Não estamos filtrando por livro ou usuário aqui
+        emprestimo = Emprestimo(id_livro=None, id_usuario=None)  
         try:
             bd.cursor.execute(emprestimo.select_all())
             resultado = bd.cursor.fetchall()
@@ -64,18 +64,18 @@ class ControllerEmprestimo:
             bd.desconectar()
 
 
-# Teste da ControllerEmprestimo
+
 controladora_emprestimo = ControllerEmprestimo()
 
-# Cadastro de um empréstimo
+
 controladora_emprestimo.cadastrarEmprestimo()
 
-# Consulta de todos os empréstimos
+
 controladora_emprestimo.consultarTodosEmprestimos()
 
-# Consulta de um empréstimo específico
+
 controladora_emprestimo.consultarEmprestimos()
 
-# Exclusão de um empréstimo
+
 controladora_emprestimo.excluirEmprestimo()
 

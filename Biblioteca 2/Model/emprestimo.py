@@ -2,7 +2,7 @@ class Emprestimo:
     def __init__(self, id_livro, id_usuario):
         self.id_livro = id_livro
         self.id_usuario = id_usuario
-        self.id_emprestimo = None  # Será gerado automaticamente pelo banco (auto_increment)
+        self.id_emprestimo = None  
 
     def create(self):
         return f'INSERT INTO emprestimo(id_livro, id_usuario) VALUES({self.id_livro}, {self.id_usuario});'

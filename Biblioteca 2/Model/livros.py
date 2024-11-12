@@ -4,7 +4,7 @@ class Livros:
         self.autor = autor
         self.genero = genero
         self.codigo = codigo
-        self.id_livro = None  # Será gerado automaticamente pelo banco (auto_increment)
+        self.id_livro = None  
         self.status = "Disponivel"
 
     def create(self):

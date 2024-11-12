@@ -3,7 +3,7 @@ class Usuario:
         self.nome = nome
         self.cpf = cpf
         self.telefone = telefone
-        self.id_usuario = None  # Será gerado automaticamente pelo banco (auto_increment)
+        self.id_usuario = None  
 
     def create(self):
         return f'INSERT INTO usuario(nome, cpf, telefone) VALUES("{self.nome}", "{self.cpf}", "{self.telefone}");'

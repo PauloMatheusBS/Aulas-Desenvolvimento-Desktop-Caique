@@ -1,4 +1,4 @@
-from Model.usuarios import Usuario
+from Model.usuario import Usuario
 from Model.main import Database
 
 class ControllerUsuario:
@@ -22,7 +22,7 @@ class ControllerUsuario:
         bd.conectar()
 
         usuario = Usuario("João Silva", "123.456.789-00", "99999-8888")
-        usuario.id_usuario = 1  # ID do usuário a ser excluído
+        usuario.id_usuario = 1  
         try:
             bd.cursor.execute(usuario.delete())
             bd.conexao.commit()
@@ -38,7 +38,7 @@ class ControllerUsuario:
         bd.conectar()
 
         usuario = Usuario("João Silva", "123.456.789-00", "99999-8888")
-        usuario.id_usuario = 1  # ID do usuário a ser atualizado
+        usuario.id_usuario = 1  
         novo_nome = "João Silva Jr."
         novo_telefone = "98765-4321"
         try:
@@ -56,7 +56,7 @@ class ControllerUsuario:
         bd.conectar()
 
         usuario = Usuario("João Silva", "123.456.789-00", "99999-8888")
-        usuario.id_usuario = 1  # ID do usuário a ser consultado
+        usuario.id_usuario = 1  
         try:
             bd.cursor.execute(usuario.select())
             resultado = bd.cursor.fetchall()
@@ -68,7 +68,7 @@ class ControllerUsuario:
             bd.desconectar()
 
 
-# Teste da ControllerUsuario
+
 controladora_usuario = ControllerUsuario()
 
 controladora_usuario.cadastrarUsuario()
