@@ -9,6 +9,7 @@ class Database:
         self.database = database
         self.conexao = None
         self.cursor = None
+        self.__name__ = "Database" #aqui é para nomear o modulo para o interpretador do python
 
     def conectar(self):
         try:
