@@ -1,5 +1,5 @@
 from Model.livros import Livros
-from Model.main import Database
+from Model.main import Database 
 
 class ControllerLivro:
     def cadastrarLivro(self):
