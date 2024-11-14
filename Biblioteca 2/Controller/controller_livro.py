@@ -76,18 +76,18 @@ class ControllerLivro:
         finally:
             self.desconectar_bd()
 
-# Exemplo de uso da ControllerLivro
+
 
 controladora_livro = ControllerLivro()
 
-# Cadastrar livro
-controladora_livro.cadastrarLivro(titulo="Dom Casmurro", autor="Machado de Assis", genero="Suspense", codigo=123)
 
-# Consultar livro
-controladora_livro.consultarLivro(id_livro=123)
+controladora_livro.cadastrarLivro(titulo="Dom Casmurro", autor="Machado de Assis", genero="Suspense", codigo=123) # Cadastrar livro
 
-# Atualizar livro
-controladora_livro.atualizarLivro(id_livro=123, novo_titulo="Dom Casmurro - Edição Atualizada", novo_status="Indisponível")
 
-# Excluir livro
-controladora_livro.excluirLivro(id_livro=123)
+controladora_livro.consultarLivro(id_livro=123) # Consultar livro
+
+
+controladora_livro.atualizarLivro(id_livro=123, novo_titulo="Dom Casmurro - Edição Atualizada", novo_status="Indisponível") # Atualizar livro
+
+
+controladora_livro.excluirLivro(id_livro=123) # Excluir livro

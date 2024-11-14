@@ -3,15 +3,13 @@ from Model.main import Database
 
 class ControllerUsuario:
     def __init__(self):
-        # Conexão com o banco de dados
-        self.bd = Database("10.28.2.59", "suporte", "suporte", "biblioteca")
+        self.bd = Database("10.28.2.59", "suporte", "suporte", "biblioteca") # Conexão com o banco de dados
 
     def cadastrar_usuario(self, nome, cpf, telefone):
         """Cadastrar um novo usuário na base de dados."""
         usuario = Usuario(nome, cpf, telefone)
         self.bd.conectar()
         try:
-  
             self.bd.cursor.execute(usuario.create())
             self.bd.conexao.commit()
             print("Usuário cadastrado com sucesso!")

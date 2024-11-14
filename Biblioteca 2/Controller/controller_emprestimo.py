@@ -48,7 +48,6 @@ class ControllerEmprestimo:
         emprestimo = Emprestimo(id_livro, id_usuario)
         self.conectar_bd()
         try:
-            # Se id_livro ou id_usuario for passado, filtra a consulta
             if id_livro and id_usuario:
                 self.bd.cursor.execute(emprestimo.select())
             elif id_livro:
@@ -88,8 +87,6 @@ class ControllerEmprestimo:
             print(f"Erro ao consultar todos os empréstimos: {e}")
         finally:
             self.desconectar_bd()
-
-# Testando a Controller de Empréstimo
 
 controladora_emprestimo = ControllerEmprestimo()
 
