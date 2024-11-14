@@ -3,8 +3,7 @@ from Model.usuario import Usuario
 
 class Biblioteca:
     def __init__(self):
-        # Inicializa um acervo vazio de livros para cada instância de Biblioteca
-        self.acervo = []
+        self.acervo = [] #starta a lista vazia
 
     def adicionar_livro(self, livro: Livros):
         """Método para adicionar livros ao acervo da biblioteca."""
@@ -14,18 +13,15 @@ class Biblioteca:
     def emprestar(usuario: Usuario, livros: list[Livros]):
         """Método para emprestar livros a um usuário."""
         for item in livros:
-            # Verifica se o usuário já atingiu o limite de empréstimos
-            if len(usuario.lista_livros) >= usuario.MAX_EMPRESTIMO:
+            if len(usuario.lista_livros) >= usuario.MAX_EMPRESTIMO: #consulta limite
                 print(f"Usuário {usuario.nome} atingiu o limite de empréstimos.")
-                return  # Não permite mais empréstimos
+                return  #aqui se bater ele so sai e é isso
             
-            # Verifica se o livro está disponível
-            if item.status != "Disponivel":
+            if item.status != "Disponivel": #confere o status
                 print(f"O livro '{item.titulo}' não está disponível para empréstimo.")
-                continue  # Pula para o próximo livro, caso o livro não esteja disponível
+                continue  #se tiver indisponivel, pula
             
-            # Registra o empréstimo no usuário e no livro
-            usuario.pegar_emprestado(item)
+            usuario.pegar_emprestado(item) #deu bom
             item.emprestar_livro(usuario)
             print(f"Livro '{item.titulo}' emprestado com sucesso para {usuario.nome}.")
             
@@ -38,22 +34,22 @@ class Biblioteca:
 # Criando uma instância de biblioteca
 biblioteca = Biblioteca()
 
-# Criando livros
-livro1 = Livros(titulo="Dom Casmurro", autor="Machado de Assis", genero="Ficção", codigo=123)
-livro2 = Livros(titulo="1984", autor="George Orwell", genero="Distopia", codigo=124)
 
-# Adicionando livros ao acervo da biblioteca
-biblioteca.adicionar_livro(livro1)
-biblioteca.adicionar_livro(livro2)
+livro1 = Livros(titulo="Dom Casmurro", autor="Machado de Assis", genero="Ficção", codigo=123) #criou
+livro2 = Livros(titulo="1984", autor="George Orwell", genero="Distopia", codigo=124) #criou
 
-# Criando um usuário
-usuario1 = Usuario(nome="João", cpf="12345678901", telefone="987654321")
 
-# Emprestando livros para o usuário
-biblioteca.emprestar(usuario1, [livro1, livro2])
+biblioteca.adicionar_livro(livro1) #add livro
+biblioteca.adicionar_livro(livro2) #add livro
 
-# Listando livros emprestados pelo usuário
-print(f"Livros emprestados por {usuario1.nome}:")
+
+usuario1 = Usuario(nome="João", cpf="12345678901", telefone="987654321") #add user
+
+
+biblioteca.emprestar(usuario1, [livro1, livro2]) #ta com erro ainda mas vai emprestar
+
+
+print(f"Livros emprestados por {usuario1.nome}:") #aqui ele lista o que esta com o usuario, não ta pronto ainda
 for livro in usuario1.lista_livros:
     print(f" - {livro.titulo}")
 

@@ -5,17 +5,15 @@ class Livros:
         self.genero = genero
         self.codigo = codigo
         self.id_livro = id_livro  # O id_livro pode ser None até ser salvo no banco
-        self.status = "Disponivel"  # Status padrão
+        self.status = "Disponivel"  
 
     def create(self):
-        # Usando placeholders para evitar SQL Injection
-        return 'INSERT INTO livro(titulo, autor, genero, status, codigo) VALUES(%s, %s, %s, %s, %s);'
-
+        return 'INSERT INTO livro(titulo, autor, genero, status, codigo) VALUES(%s, %s, %s, %s, %s);' #placeholder pra não trollar a entrada
+  
     def delete(self):
         if not self.id_livro:
             raise ValueError("Não é possível excluir um livro sem o ID.")
-        # Usando placeholder para evitar SQL Injection
-        return 'DELETE FROM livro WHERE id_livro = %s;'
+        return 'DELETE FROM livro WHERE id_livro = %s;'  #placeholder pra não trollar a entrada
 
     def update(self, novo_titulo=None, novo_autor=None, novo_genero=None, novo_status=None):
         if not self.id_livro:

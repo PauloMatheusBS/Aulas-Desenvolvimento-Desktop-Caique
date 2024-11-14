@@ -2,24 +2,20 @@ class Emprestimo:
     def __init__(self, id_livro, id_usuario, id_emprestimo=None):
         self.id_livro = id_livro
         self.id_usuario = id_usuario
-        self.id_emprestimo = id_emprestimo  # O id_emprestimo pode ser None até ser salvo no banco
+        self.id_emprestimo = id_emprestimo  
 
     def create(self):
-        # Usando placeholders para prevenir SQL Injection
-        return 'INSERT INTO emprestimo(id_livro, id_usuario) VALUES(%s, %s);'
+        return 'INSERT INTO emprestimo(id_livro, id_usuario) VALUES(%s, %s);' #placeholder pra não trollar a entrada
 
     def delete(self):
         if not self.id_emprestimo:
-            raise ValueError("Não é possível excluir um empréstimo sem o ID.")
-        # Usando placeholder para evitar SQL Injection
+            raise ValueError("Não é possível excluir um empréstimo sem o ID.") #placeholder pra não trollar a entrada
         return 'DELETE FROM emprestimo WHERE id_emprestimo = %s;'
 
     def select(self):
-        # Usando placeholder para evitar SQL Injection
-        return 'SELECT * FROM emprestimo WHERE id_livro = %s AND id_usuario = %s;'
+        return 'SELECT * FROM emprestimo WHERE id_livro = %s AND id_usuario = %s;' #placeholder pra não trollar a entrada
 
     def select_all(self):
-        # Consultar todos os empréstimos
         return 'SELECT * FROM emprestimo;'
     
 #///////////////////////////////////////////////////////////////////////////////////////////
