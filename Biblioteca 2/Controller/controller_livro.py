@@ -19,7 +19,8 @@ class ControllerLivro:
         livro = Livros(titulo, autor, genero, codigo)
         self.conectar_bd()
         try:
-            self.bd.cursor.execute(livro.create())
+            query, params = livro.create()  # Obtém a query e os parâmetros
+            self.bd.cursor.execute(query, params)  # Passa os parâmetros para o execute
             self.bd.conexao.commit()
             print(f"Livro '{titulo}' cadastrado com sucesso!")
         except Exception as e:
@@ -34,7 +35,8 @@ class ControllerLivro:
         livro.id_livro = id_livro
         self.conectar_bd()
         try:
-            self.bd.cursor.execute(livro.delete())
+            query, params = livro.delete()  # Obtém a query e os parâmetros
+            self.bd.cursor.execute(query, params)  # Passa os parâmetros para o execute
             self.bd.conexao.commit()
             print(f"Livro de ID {id_livro} excluído com sucesso!")
         except Exception as e:
@@ -49,7 +51,8 @@ class ControllerLivro:
         livro.id_livro = id_livro
         self.conectar_bd()
         try:
-            self.bd.cursor.execute(livro.update(novo_titulo, novo_autor, novo_genero, novo_status))
+            query, params = livro.update(novo_titulo, novo_autor, novo_genero, novo_status)  # Obtém a query e os parâmetros
+            self.bd.cursor.execute(query, params)  # Passa os parâmetros para o execute
             self.bd.conexao.commit()
             print(f"Livro de ID {id_livro} atualizado com sucesso!")
         except Exception as e:
@@ -62,32 +65,34 @@ class ControllerLivro:
         """Consultar um livro pelo ID."""
         livro = Livros(titulo=None, autor=None, genero=None, codigo=None)
         livro.id_livro = id_livro
-        self.conectar_bd()
+        self.conectar_bd()  # Estabelecendo a conexão antes de todas as operações
         try:
-            self.bd.cursor.execute(livro.select())
+            query, params = livro.select()  # Obtém a query e os parâmetros
+            self.bd.cursor.execute(query, params)  # Passa os parâmetros para o execute
             resultado = self.bd.cursor.fetchall()
             if resultado:
                 for linha in resultado:
-                    print(linha)
+                    print(linha)  # Exibe os dados do livro encontrado
             else:
                 print(f"Nenhum livro encontrado com o ID {id_livro}.")
         except Exception as e:
             print(f"Erro ao consultar livro: {e}")
         finally:
-            self.desconectar_bd()
+            self.desconectar_bd()  # Desconecta após finalizar a operação
 
 
 
+# Exemplo de uso da controladora de livros
 controladora_livro = ControllerLivro()
 
+# Cadastrar um novo livro
+controladora_livro.cadastrarLivro(titulo="Dom Casmurro", autor="Machado de Assis", genero="Suspense", codigo=123)
 
-controladora_livro.cadastrarLivro(titulo="Dom Casmurro", autor="Machado de Assis", genero="Suspense", codigo=123) # Cadastrar livro
+# Consultar um livro pelo ID
+controladora_livro.consultarLivro(id_livro=123)
 
+# Atualizar informações de um livro
+controladora_livro.atualizarLivro(id_livro=123, novo_titulo="Dom Casmurro - Edição Atualizada", novo_status="Indisponível")
 
-controladora_livro.consultarLivro(id_livro=123) # Consultar livro
-
-
-controladora_livro.atualizarLivro(id_livro=123, novo_titulo="Dom Casmurro - Edição Atualizada", novo_status="Indisponível") # Atualizar livro
-
-
-controladora_livro.excluirLivro(id_livro=123) # Excluir livro
+# Excluir um livro pelo ID
+controladora_livro.excluirLivro(id_livro=123)
